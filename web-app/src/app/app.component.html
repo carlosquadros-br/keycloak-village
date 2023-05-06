@@ -1,0 +1,60 @@
+<div class="flex min-h-full h-screen flex-col justify-start px-6 py-10 lg:px-8 bg-black">
+  <div class="sm:w-full justify-center flex mt-0">
+    <div class="flex mt-1">
+      <h2 class="text-3xl tex-center text-purple-800 font-bold">W</h2>
+      <h2 class="text-3xl tex-center text-green-400 font-bold">
+        elcome
+      </h2>
+      <h2 class="text-3xl tex-center text-purple-800 font-bold">
+        !!!
+      </h2>
+    </div>
+  </div>
+  <div class="mt-2 sm:mx-auto sm:w-full sm-max-w-sm">
+    <div class="text-center">
+      <h2 class="mt-1 text-3xl text-center font-bold">
+        <span *ngFor="let letter of textAsArray; let i = index"
+              [ngClass]="i % 2 === 0 ? 'text-purple-600' : 'text-purple-100'">{{ letter }}</span>
+      </h2>
+    </div>
+  </div>
+  <div [className]="'w-full flex items-center justify-center mt-10 mx-auto sm:max-w-sm'">
+    <div class="p-8 bg-gray-700 border border-gray-500 rounded text-white max-w-[1100px] sm:max-w-sm">
+      <span [className]="'text-2xl'"><strong className="text-3xl mb-6 block text-white">Sign in to your account</strong></span>
+      <form  [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="space-y-6 flex flex-col justify-center max-w-sm w-full g-2 pt-2">
+        <input [ngClass]="{
+          'h-14 px-5 rounded-md bg-black text-white border border-gray-500 ': true,
+          'focus:border-white focus:border-2 focus:shadow-lg focus:shadow-purple-700 outline-none focus:transition-transform ease-in duration-200': true
+        }"
+        formControlName="name"
+        placeholder="username" id="username" name="username" autocomplete="username" required>
+        <input
+        formControlName="password"
+        [ngClass]="{
+          'h-14 px-5 rounded-md p-2 bg-black text-white border border-gray-500 ': true,
+          'focus:border-purple-100 focus:border-2 focus:shadow-lg focus:shadow-purple-700 outline-none focus:transition-transform ease-in duration-200': true
+        }"
+        placeholder="password" id="password" name="password" autocomplete="password" required>
+        <button type="submit" [ngClass]="{
+          'mt-10 rounded py-4 bg-green-400 uppercase font-bold text-sm': true,
+          'hover:bg-green-700 transition-colors disabled:opacity-50': true
+        }">
+          <span>Sing in</span>
+        </button>
+        <button (click)="onLogout()" [ngClass]="{
+          'mt-10 rounded py-4 bg-red-400 uppercase font-bold text-sm': true,
+          'hover:bg-red-700 transition-colors disabled:opacity-50': true
+        }">
+          <span>Logout</span>
+        </button>
+      </form>
+      <div ngClass="max-w-sm">
+        <p ngClass="break-after-right">Name: {{ loginForm.controls.name.value }}</p>
+        <p ngClass="break-after-right">Password: {{ loginForm.controls.password.value }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
