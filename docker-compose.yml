@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - ${KC_PORT}:8080
+    command: ["start-dev", "--import-realm"]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health/ready"]
+      start_period: 10s
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      REALM_NAME: ${KC_REALM_NAME}
+    deploy:
+      resources:
+        limits:
+          memory: 500M 
+          cpus: '0,5'
+    volumes:
+      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
+      

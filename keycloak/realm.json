@@ -1,0 +1,5 @@
+{
+ "realm" : "${REALM_NAME}",
+ "sslRequired": "none",
+ "enabled": true
+}
